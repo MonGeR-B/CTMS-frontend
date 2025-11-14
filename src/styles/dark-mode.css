@@ -1,0 +1,36 @@
+
+:root {
+  --background-dark: #003366;
+  --primary-main: #FF4C39;
+  --primary-light: #FF6B5A;
+  --primary-dark: #E6442F;
+  --secondary-main: #FFB573;
+  --secondary-light: #FFC996;
+  --secondary-dark: #E6A266;
+  --neutral-white: #FFFFFF;
+  --neutral-gray50: #F9F9F9;
+  --neutral-gray100: #F3F3F3;
+  --neutral-gray200: #EEEEEE;
+  --neutral-gray300: #E3E3E3;
+  --neutral-gray400: #C1C1C1;
+  --neutral-gray500: #B1B1B1;
+  --neutral-gray600: #979797;
+  --neutral-gray700: #757575;
+  --neutral-gray800: #636363;
+  --neutral-gray900: #313131;
+  --neutral-black: #000000;
+  --status-success: #10B981;
+  --status-error: #EF4444;
+  --status-warning: #F59E0B;
+  --status-info: #3B82F6;
+}
+
+[data-theme='dark'] {
+  --background-color: var(--background-dark);
+  --text-color: var(--neutral-white);
+  --primary-color: var(--primary-main);
+  --secondary-color: var(--secondary-main);
+  --accent-color: var(--primary-gradient);
+  --card-background: #002244;
+  --border-color: var(--neutral-gray700);
+}

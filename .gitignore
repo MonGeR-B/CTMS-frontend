@@ -1,0 +1,24 @@
+﻿# Dependencies
+node_modules/
+
+# Next.js build output
+.next/
+
+# Production build or exports (if used)
+out/
+dist/
+
+# Env files
+.env
+.env.local
+.env.*.local
+
+# Editor
+.vscode/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.pnpm-debug.log*
