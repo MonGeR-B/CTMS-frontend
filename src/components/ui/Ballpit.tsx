@@ -428,7 +428,7 @@ class Y extends MeshPhysicalMaterial {
 
   constructor(params: any) {
     super(params);
-    this.defines = { USE_UV: '' };
+    (this as any).defines = { USE_UV: '' };
     this.onBeforeCompile = shader => {
       Object.assign(shader.uniforms, this.uniforms);
       shader.fragmentShader =
