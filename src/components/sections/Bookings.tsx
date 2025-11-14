@@ -2,7 +2,35 @@
 import { useTheme } from '../../contexts/ThemeContext';
 import { Plane, Hotel, Car } from 'lucide-react';
 
-const bookings = [
+type FlightBooking = {
+  type: 'Flight';
+  origin: string;
+  destination: string;
+  date: string;
+  details: string;
+  status: 'Confirmed' | 'Pending' | string;
+};
+
+type HotelBooking = {
+  type: 'Hotel';
+  name: string;
+  location: string;
+  checkIn: string;
+  checkOut: string;
+  status: 'Confirmed' | 'Pending' | string;
+};
+
+type CarBooking = {
+  type: 'Car';
+  provider: string;
+  pickup: string;
+  dropoff: string;
+  status: 'Confirmed' | 'Pending' | string;
+};
+
+type Booking = FlightBooking | HotelBooking | CarBooking;
+
+const bookings: Booking[] = [
   {
     type: 'Flight',
     origin: 'DEL',
@@ -28,7 +56,7 @@ const bookings = [
   }
 ];
 
-const BookingCard = ({ booking }) => {
+const BookingCard = ({ booking }: { booking: Booking }) => {
   const { theme } = useTheme();
   const getIcon = () => {
     switch (booking.type) {

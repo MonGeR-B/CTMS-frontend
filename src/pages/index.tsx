@@ -30,10 +30,10 @@ export default function Home() {
               theme === 'dark' ? 'text-white' : 'text-[#303036]'
             } mb-2`}
           >
-            Lets Plan, Baibhab!
+            Let&#39;s Plan, Baibhab!
           </h1>
           <p className={`${theme === 'dark' ? 'text-gray-400' : 'text-[#787880]'} text-sm`}>
-            Here's what's happening with your travel management today.
+            Here&#39;s what&#39;s happening with your travel management today.
           </p>
         </div>
 

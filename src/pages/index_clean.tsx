@@ -16,9 +16,9 @@ export default function Home() {
       >
         {/* Header Section */}
         <div className="mb-8 ">
-          <h1 className="text-2xl font-semibold text-[#303036] mb-2">Lets Plan, Baibhab!</h1>
+          <h1 className="text-2xl font-semibold text-[#303036] mb-2">Let&#39;s Plan, Baibhab!</h1>
           <p className="text-[#787880] text-sm">
-            Here's what's happening with your travel management today.
+            Here&#39;s what&#39;s happening with your travel management today.
           </p>
         </div>
 
