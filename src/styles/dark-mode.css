@@ -34,3 +34,24 @@
   --card-background: #002244;
   --border-color: var(--neutral-gray700);
 }
+
+[data-theme='dark'] .notification-panel {
+  background-color: var(--card-background);
+  color: var(--text-color);
+}
+
+[data-theme='dark'] .notification-header {
+  color: var(--text-color);
+}
+
+[data-theme='dark'] .notification-item {
+  border-color: var(--border-color);
+}
+
+[data-theme='dark'] .notification-item:hover {
+  background-color: #001122;
+}
+
+[data-theme='dark'] .notification-footer {
+  color: var(--neutral-gray400);
+}

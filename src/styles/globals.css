@@ -35,3 +35,26 @@ body{
 .shadow-glass{
   box-shadow: 0 10px 30px rgba(14,24,40,0.06);
 }
+
+/* Thin custom scrollbar utility */
+.scrollbar-thin{
+  scrollbar-width: thin;           /* Firefox */
+  scrollbar-color: rgba(0,0,0,0.25) transparent;
+}
+.scrollbar-thin::-webkit-scrollbar{
+  width: 6px;                      /* Chrome, Edge, Safari */
+}
+.scrollbar-thin::-webkit-scrollbar-track{
+  background: transparent;
+}
+.scrollbar-thin::-webkit-scrollbar-thumb{
+  background-color: rgba(0,0,0,0.25);
+  border-radius: 9999px;
+}
+/* Dark mode variant when using Tailwind's class strategy */
+.dark .scrollbar-thin{
+  scrollbar-color: rgba(255,255,255,0.25) transparent;
+}
+.dark .scrollbar-thin::-webkit-scrollbar-thumb{
+  background-color: rgba(255,255,255,0.25);
+}
