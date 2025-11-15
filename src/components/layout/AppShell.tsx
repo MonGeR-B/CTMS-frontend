@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import Sidebar from './Sidebar';
 import Header from './Header';
+import Footer from './Footer';
 import ScrollVelocity from '../ui/ScrollVelocity';
 
 export default function AppShell({ children }: { children: React.ReactNode }) {
@@ -21,9 +22,10 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
         isMobileOpen={isMobileSidebarOpen} 
         onMobileClose={() => setIsMobileSidebarOpen(false)} 
       />
-      <div className="w-full lg:flex-1 min-h-screen relative z-10">
+      <div className="w-full lg:flex-1 min-h-screen relative z-10 flex flex-col">
         <Header onMobileMenuToggle={() => setIsMobileSidebarOpen(!isMobileSidebarOpen)} />
-        <main className="p-4 md:p-6 lg:p-8">{children}</main>
+        <main className="flex-1 p-4 md:p-6 lg:p-8">{children}</main>
+        <Footer />
       </div>
     </div>
   );
