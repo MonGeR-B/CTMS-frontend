@@ -1,6 +1,7 @@
 
 import { useTheme } from '../../contexts/ThemeContext';
-import { Plane, Hotel, Car } from 'lucide-react';
+import { useState } from 'react';
+import { Plane, Hotel, Car, X, Calendar, MapPin, CreditCard } from 'lucide-react';
 
 type FlightBooking = {
   type: 'Flight';
@@ -9,6 +10,9 @@ type FlightBooking = {
   date: string;
   details: string;
   status: 'Confirmed' | 'Pending' | string;
+  cost: string;
+  seat: string;
+  terminal: string;
 };
 
 type HotelBooking = {
@@ -18,6 +22,9 @@ type HotelBooking = {
   checkIn: string;
   checkOut: string;
   status: 'Confirmed' | 'Pending' | string;
+  cost: string;
+  roomType: string;
+  guests: number;
 };
 
 type CarBooking = {
@@ -26,6 +33,9 @@ type CarBooking = {
   pickup: string;
   dropoff: string;
   status: 'Confirmed' | 'Pending' | string;
+  cost: string;
+  carType: string;
+  duration: string;
 };
 
 type Booking = FlightBooking | HotelBooking | CarBooking;
@@ -37,7 +47,10 @@ const bookings: Booking[] = [
     destination: 'BOM',
     date: '2024-12-20',
     details: 'Indigo 6E 2045',
-    status: 'Confirmed'
+    status: 'Confirmed',
+    cost: '₹8,500',
+    seat: '12A',
+    terminal: 'Terminal 3'
   },
   {
     type: 'Hotel',
@@ -45,18 +58,91 @@ const bookings: Booking[] = [
     location: 'Mumbai',
     checkIn: '2024-12-20',
     checkOut: '2024-12-25',
-    status: 'Confirmed'
+    status: 'Confirmed',
+    cost: '₹25,000',
+    roomType: 'Deluxe Room',
+    guests: 2
   },
   {
     type: 'Car',
     provider: 'Avis',
     pickup: '2024-12-20',
     dropoff: '2024-12-25',
-    status: 'Pending'
+    status: 'Pending',
+    cost: '₹3,500',
+    carType: 'Sedan',
+    duration: '5 days'
   }
 ];
 
-const BookingCard = ({ booking }: { booking: Booking }) => {
+const BookingDetailPopup = ({ booking, isOpen, onClose, theme }: any) => {
+  if (!isOpen) return null;
+
+  const getIcon = () => {
+    switch (booking.type) {
+      case 'Flight':
+        return <Plane className="w-5 h-5 text-[#FF4C39]" />;
+      case 'Hotel':
+        return <Hotel className="w-5 h-5 text-[#3B82F6]" />;
+      case 'Car':
+        return <Car className="w-5 h-5 text-[#10B981]" />;
+      default:
+        return null;
+    }
+  };
+
+  return (
+    <div className={`mt-3 p-4 rounded-2xl border ${theme === 'dark' ? 'bg-gray-800/60 border-gray-700/40' : 'bg-gray-50/80 border-gray-200'}`}>
+      <div className="flex items-center justify-between mb-3">
+        <h4 className={`font-semibold text-sm ${theme === 'dark' ? 'text-white' : 'text-[#303036]'}`}>
+          {booking.type} Details
+        </h4>
+        <button onClick={onClose} className={`p-1 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors`}>
+          <X className={`w-4 h-4 ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`} />
+        </button>
+      </div>
+      <div className="space-y-3">
+        <div className={`p-3 rounded-xl ${theme === 'dark' ? 'bg-gray-700/30' : 'bg-white/60'}`}>
+          <div className="flex items-center justify-between mb-2">
+            <span className={`text-xs font-medium ${theme === 'dark' ? 'text-gray-300' : 'text-[#303036]'}`}>Booking Info</span>
+            {getIcon()}
+          </div>
+          {booking.type === 'Flight' && (
+            <>
+              <p className={`text-xs ${theme === 'dark' ? 'text-gray-400' : 'text-[#787880]'}`}>Route: {booking.origin} → {booking.destination}</p>
+              <p className={`text-xs ${theme === 'dark' ? 'text-gray-400' : 'text-[#787880]'}`}>Flight: {booking.details}</p>
+              <p className={`text-xs ${theme === 'dark' ? 'text-gray-400' : 'text-[#787880]'}`}>Seat: {booking.seat}</p>
+            </>
+          )}
+          {booking.type === 'Hotel' && (
+            <>
+              <p className={`text-xs ${theme === 'dark' ? 'text-gray-400' : 'text-[#787880]'}`}>Hotel: {booking.name}</p>
+              <p className={`text-xs ${theme === 'dark' ? 'text-gray-400' : 'text-[#787880]'}`}>Room: {booking.roomType}</p>
+              <p className={`text-xs ${theme === 'dark' ? 'text-gray-400' : 'text-[#787880]'}`}>Guests: {booking.guests}</p>
+            </>
+          )}
+          {booking.type === 'Car' && (
+            <>
+              <p className={`text-xs ${theme === 'dark' ? 'text-gray-400' : 'text-[#787880]'}`}>Provider: {booking.provider}</p>
+              <p className={`text-xs ${theme === 'dark' ? 'text-gray-400' : 'text-[#787880]'}`}>Type: {booking.carType}</p>
+              <p className={`text-xs ${theme === 'dark' ? 'text-gray-400' : 'text-[#787880]'}`}>Duration: {booking.duration}</p>
+            </>
+          )}
+        </div>
+        <div className={`p-3 rounded-xl ${theme === 'dark' ? 'bg-gray-700/30' : 'bg-white/60'}`}>
+          <div className="flex items-center justify-between mb-2">
+            <span className={`text-xs font-medium ${theme === 'dark' ? 'text-gray-300' : 'text-[#303036]'}`}>Payment</span>
+            <CreditCard className="w-4 h-4 text-[#FF4C39]" />
+          </div>
+          <p className={`text-xs ${theme === 'dark' ? 'text-gray-400' : 'text-[#787880]'}`}>Cost: {booking.cost}</p>
+          <p className={`text-xs ${theme === 'dark' ? 'text-gray-400' : 'text-[#787880]'}`}>Status: {booking.status}</p>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const BookingCard = ({ booking, onClick }: { booking: Booking; onClick: () => void }) => {
   const { theme } = useTheme();
   const getIcon = () => {
     switch (booking.type) {
@@ -72,11 +158,12 @@ const BookingCard = ({ booking }: { booking: Booking }) => {
   };
 
   return (
-    <div
-      className={`p-3 md:p-4 rounded-xl md:rounded-2xl ${
+    <button
+      onClick={onClick}
+      className={`w-full p-3 md:p-4 rounded-xl md:rounded-2xl hover:scale-[1.02] transition-all duration-200 text-left ${
         theme === 'dark'
-          ? 'bg-gray-700/50 border border-gray-600/10'
-          : 'bg-white/60 border'
+          ? 'bg-gray-700/50 border border-gray-600/10 hover:bg-gray-700/70'
+          : 'bg-white/60 border hover:bg-white/80'
       }`}
     >
       <div className="flex items-center justify-between">
@@ -112,12 +199,14 @@ const BookingCard = ({ booking }: { booking: Booking }) => {
           {booking.status}
         </div>
       </div>
-    </div>
+    </button>
   );
 };
 
 const Bookings = () => {
   const { theme } = useTheme();
+  const [selectedBooking, setSelectedBooking] = useState<any>(null);
+
   return (
     <div
       className={`rounded-2xl md:rounded-3xl p-4 md:p-6 shadow-[0_1px_3px_rgba(0,0,0,0.05)] ${
@@ -135,9 +224,18 @@ const Bookings = () => {
       </h3>
       <div className="space-y-2 md:space-y-3">
         {bookings.map((booking, index) => (
-          <BookingCard key={index} booking={booking} />
+          <BookingCard key={index} booking={booking} onClick={() => setSelectedBooking(booking)} />
         ))}
       </div>
+      
+      {selectedBooking && (
+        <BookingDetailPopup 
+          booking={selectedBooking} 
+          isOpen={!!selectedBooking} 
+          onClose={() => setSelectedBooking(null)} 
+          theme={theme}
+        />
+      )}
     </div>
   );
 };

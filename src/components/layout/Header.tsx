@@ -1,5 +1,5 @@
 // src/components/layout/Header.tsx
-import { Bell, Menu } from 'lucide-react';
+import { Bell, Menu, ChevronDown, User, Settings, LogOut, HelpCircle } from 'lucide-react';
 import React, { useState, useEffect } from 'react';
 import { useTheme } from '../../contexts/ThemeContext';
 import Notifications from '../sections/Notifications';
@@ -9,6 +9,7 @@ export default function Header({ onMobileMenuToggle }: { onMobileMenuToggle?: ()
   const [showNotifications, setShowNotifications] = useState(false);
   const [unreadCount, setUnreadCount] = useState(0);
   const [showAll, setShowAll] = useState(false);
+  const [showProfile, setShowProfile] = useState(false);
   const { theme } = useTheme();
 
   useEffect(() => {
@@ -87,21 +88,25 @@ export default function Header({ onMobileMenuToggle }: { onMobileMenuToggle?: ()
                 )}
               </button>
             </div>
-            <div
-              className={`relative p-2 rounded-2xl shadow-[0_1px_3px_rgba(0,0,0,0.05)] hover:shadow-[0_2px_8px_rgba(0,0,0,0.08)] transition-all duration-200 flex items-center gap-2 md:gap-3 ${
-                theme === 'dark'
-                  ? 'bg-gray-800/80 backdrop-blur-sm border border-gray-700/40'
-                  : 'bg-white/80 backdrop-blur-sm border border-white/40'
-              }`}
-            >
-              <div className="w-8 h-8 md:w-9 md:h-9 rounded-full bg-gradient-to-br from-[#FF4C39] to-[#FFB573] text-white flex items-center justify-center font-semibold text-xs">
-                BG
-              </div>
-              <div
-                className={`text-sm font-medium hidden sm:block ${theme === 'dark' ? 'text-white' : 'text-[#303036]'}`}
+            <div className="relative">
+              <button
+                onClick={() => setShowProfile(!showProfile)}
+                className={`relative p-2 rounded-2xl shadow-[0_1px_3px_rgba(0,0,0,0.05)] hover:shadow-[0_2px_8px_rgba(0,0,0,0.08)] transition-all duration-200 flex items-center gap-2 md:gap-3 ${
+                  theme === 'dark'
+                    ? 'bg-gray-800/80 backdrop-blur-sm border border-gray-700/40'
+                    : 'bg-white/80 backdrop-blur-sm border border-white/40'
+                }`}
               >
-                Baibhab Ghosh
-              </div>
+                <div className="w-8 h-8 md:w-9 md:h-9 rounded-full bg-gradient-to-br from-[#FF4C39] to-[#FFB573] text-white flex items-center justify-center font-semibold text-xs">
+                  BG
+                </div>
+                <div
+                  className={`text-sm font-medium hidden sm:block ${theme === 'dark' ? 'text-white' : 'text-[#303036]'}`}
+                >
+                  Baibhab Ghosh
+                </div>
+                <ChevronDown className={`w-4 h-4 transition-transform ${showProfile ? 'rotate-180' : ''} ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`} />
+              </button>
             </div>
           </div>
         </div>
@@ -137,6 +142,63 @@ export default function Header({ onMobileMenuToggle }: { onMobileMenuToggle?: ()
               onClick={(e) => e.stopPropagation()}
             >
               <Notifications mode="all" onUnreadCountChange={setUnreadCount} />
+            </div>
+          </div>
+        </>
+      )}
+
+      {showProfile && (
+        <>
+          <div
+            className="fixed inset-0 bg-black bg-opacity-30 z-40"
+            onClick={() => setShowProfile(false)}
+          ></div>
+          <div
+            className="fixed top-16 md:top-20 right-2 md:right-4 w-64 rounded-xl overflow-hidden shadow-lg bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm border dark:border-gray-700/40 z-50"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="p-4 border-b border-gray-200 dark:border-gray-700">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#FF4C39] to-[#FFB573] text-white flex items-center justify-center font-semibold text-sm">
+                  BG
+                </div>
+                <div>
+                  <div className={`font-medium ${theme === 'dark' ? 'text-white' : 'text-[#303036]'}`}>
+                    Baibhab Ghosh
+                  </div>
+                  <div className={`text-sm ${theme === 'dark' ? 'text-gray-400' : 'text-[#787880]'}`}>
+                    baibhab@company.com
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="py-2">
+              <button
+                className={`w-full flex items-center gap-3 px-4 py-3 text-left hover:bg-gray-100 dark:hover:bg-gray-700/50 transition-colors ${theme === 'dark' ? 'text-white' : 'text-[#303036]'}`}
+              >
+                <User className="w-4 h-4" />
+                <span className="text-sm">My Profile</span>
+              </button>
+              <button
+                className={`w-full flex items-center gap-3 px-4 py-3 text-left hover:bg-gray-100 dark:hover:bg-gray-700/50 transition-colors ${theme === 'dark' ? 'text-white' : 'text-[#303036]'}`}
+              >
+                <Settings className="w-4 h-4" />
+                <span className="text-sm">Settings</span>
+              </button>
+              <button
+                className={`w-full flex items-center gap-3 px-4 py-3 text-left hover:bg-gray-100 dark:hover:bg-gray-700/50 transition-colors ${theme === 'dark' ? 'text-white' : 'text-[#303036]'}`}
+              >
+                <HelpCircle className="w-4 h-4" />
+                <span className="text-sm">Help & Support</span>
+              </button>
+              <div className="border-t border-gray-200 dark:border-gray-700 mt-2 pt-2">
+                <button
+                  className={`w-full flex items-center gap-3 px-4 py-3 text-left hover:bg-gray-100 dark:hover:bg-gray-700/50 transition-colors text-red-600 dark:text-red-400`}
+                >
+                  <LogOut className="w-4 h-4" />
+                  <span className="text-sm">Sign Out</span>
+                </button>
+              </div>
             </div>
           </div>
         </>
