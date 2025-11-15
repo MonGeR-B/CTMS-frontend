@@ -28,9 +28,13 @@ const navigationItems = [
 export default function Sidebar({
   active = 'dashboard',
   onActiveChange,
+  isMobileOpen = false,
+  onMobileClose,
 }: {
   active?: string;
   onActiveChange?: (key: string) => void;
+  isMobileOpen?: boolean;
+  onMobileClose?: () => void;
 }) {
   const router = useRouter();
   const { theme } = useTheme();
@@ -44,16 +48,34 @@ export default function Sidebar({
 
   const handleNavigation = (item: (typeof navigationItems)[0]) => {
     router.push(item.href);
+    // Close mobile sidebar after navigation
+    if (onMobileClose) {
+      onMobileClose();
+    }
   };
   return (
-    <aside
-      className={`sticky top-0 w-[240px] h-screen ${
-        theme === 'dark'
-          ? 'bg-gray-900 border-r border-gray-800'
-          : 'bg-gradient-to-b from-[#FDF4F0] via-[#FBF1EC] to-[#FFEDE5] border-r border-[#E5E5E7]'
-      } overflow-y-auto`}
-      style={{ fontFamily: 'Inter, system-ui, sans-serif' }}
-    >
+    <>
+      {/* Mobile Overlay */}
+      {isMobileOpen && (
+        <div 
+          className="fixed inset-0 bg-black/50 z-40 lg:hidden" 
+          onClick={onMobileClose}
+        />
+      )}
+      
+      <aside
+        className={`w-[240px] h-screen overflow-y-auto transition-transform duration-300 z-50 ${
+          theme === 'dark'
+            ? 'bg-gray-900 border-r border-gray-800'
+            : 'bg-gradient-to-b from-[#FDF4F0] via-[#FBF1EC] to-[#FFEDE5] border-r border-[#E5E5E7]'
+        } ${
+          // Mobile: fixed overlay, Desktop: sticky in flow
+          isMobileOpen 
+            ? 'fixed top-0 left-0 translate-x-0 lg:sticky lg:top-0' 
+            : 'fixed top-0 left-0 -translate-x-full lg:sticky lg:top-0 lg:translate-x-0'
+        }`}
+        style={{ fontFamily: 'Inter, system-ui, sans-serif' }}
+      >
       <div className="px-4 py-6 flex flex-col h-full">
         {/* Logo Section */}
         <div className="flex items-center justify-between mb-8">
@@ -151,6 +173,7 @@ export default function Sidebar({
         </div>
       </div>
     </aside>
+    </>
   );
 }
 

@@ -73,29 +73,29 @@ const BookingCard = ({ booking }: { booking: Booking }) => {
 
   return (
     <div
-      className={`p-4 rounded-2xl ${
+      className={`p-3 md:p-4 rounded-xl md:rounded-2xl ${
         theme === 'dark'
           ? 'bg-gray-700/50 border border-gray-600/10'
           : 'bg-white/60 border'
       }`}
     >
       <div className="flex items-center justify-between">
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-3 md:gap-4 flex-1 min-w-0">
           <div
-            className={`w-10 h-10 rounded-xl flex items-center justify-center ${
+            className={`w-8 h-8 md:w-10 md:h-10 rounded-lg md:rounded-xl flex items-center justify-center flex-shrink-0 ${
               booking.type === 'Flight' ? 'bg-[#FF4C39]/10' : 
               booking.type === 'Hotel' ? 'bg-[#3B82F6]/10' : 'bg-[#10B981]/10'
             }`}
           >
             {getIcon()}
           </div>
-          <div>
-            <div className={`font-medium ${theme === 'dark' ? 'text-white' : 'text-[#303036]'}`}>
+          <div className="min-w-0 flex-1">
+            <div className={`font-medium text-sm md:text-base truncate ${theme === 'dark' ? 'text-white' : 'text-[#303036]'}`}>
               {booking.type === 'Flight' && `${booking.origin} → ${booking.destination}`}
               {booking.type === 'Hotel' && booking.name}
               {booking.type === 'Car' && booking.provider}
             </div>
-            <div className={`text-sm ${theme === 'dark' ? 'text-gray-400' : 'text-[#787880]'}`}>
+            <div className={`text-xs md:text-sm truncate ${theme === 'dark' ? 'text-gray-400' : 'text-[#787880]'}`}>
               {booking.type === 'Flight' && `On ${booking.date}`}
               {booking.type === 'Hotel' && `In ${booking.location}`}
               {booking.type === 'Car' && `Pickup on ${booking.pickup}`}
@@ -103,7 +103,7 @@ const BookingCard = ({ booking }: { booking: Booking }) => {
           </div>
         </div>
         <div
-          className={`text-xs font-medium px-2 py-1 rounded-xl ${
+          className={`text-xs font-medium px-2 py-1 rounded-lg md:rounded-xl flex-shrink-0 ${
             booking.status === 'Confirmed'
               ? 'bg-[#10B981]/10 text-[#10B981]'
               : 'bg-[#F59E0B]/10 text-[#F59E0B]'
@@ -120,20 +120,20 @@ const Bookings = () => {
   const { theme } = useTheme();
   return (
     <div
-      className={`rounded-3xl p-6 shadow-[0_1px_3px_rgba(0,0,0,0.05)] ${
+      className={`rounded-2xl md:rounded-3xl p-4 md:p-6 shadow-[0_1px_3px_rgba(0,0,0,0.05)] ${
         theme === 'dark'
           ? 'bg-gray-800/80 backdrop-blur-sm border border-gray-700/40'
           : 'bg-white/80 backdrop-blur-sm border border-white/40'
       }`}
     >
       <h3
-        className={`text-lg font-semibold ${
+        className={`text-base md:text-lg font-semibold ${
           theme === 'dark' ? 'text-white' : 'text-[#303036]'
-        } mb-4`}
+        } mb-3 md:mb-4`}
       >
         Active Bookings
       </h3>
-      <div className="space-y-3">
+      <div className="space-y-2 md:space-y-3">
         {bookings.map((booking, index) => (
           <BookingCard key={index} booking={booking} />
         ))}

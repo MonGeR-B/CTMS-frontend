@@ -14,20 +14,20 @@ export default function RecentExpenses() {
   const { theme } = useTheme();
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-3 md:space-y-4">
       {expenses.map((expense) => (
-        <div key={expense.id} className={`flex justify-between items-center p-4 rounded-2xl backdrop-blur-sm shadow-[0_4px_12px_rgba(0,0,0,0.15)] hover:shadow-[0_6px_20px_rgba(0,0,0,0.25)] transition-all duration-200 ${
+        <div key={expense.id} className={`flex justify-between items-center gap-3 p-3 md:p-4 rounded-xl md:rounded-2xl backdrop-blur-sm shadow-[0_4px_12px_rgba(0,0,0,0.15)] hover:shadow-[0_6px_20px_rgba(0,0,0,0.25)] transition-all duration-200 ${
           theme === 'dark'
             ? 'bg-gray-800/80 border border-gray-700/40'
             : 'bg-white/60 border border-white/30'
         }`}>
-          <div>
-            <div className={`font-medium ${theme === 'dark' ? 'text-white' : 'text-[#303036]'}`}>{expense.title}</div>
-            <div className={`text-sm ${theme === 'dark' ? 'text-gray-400' : 'text-[#787880]'}`}>{new Date(expense.date).toLocaleDateString()}</div>
+          <div className="min-w-0 flex-1 pr-3">
+            <div className={`font-medium text-sm md:text-base truncate ${theme === 'dark' ? 'text-white' : 'text-[#303036]'}`}>{expense.title}</div>
+            <div className={`text-xs md:text-sm ${theme === 'dark' ? 'text-gray-400' : 'text-[#787880]'}`}>{new Date(expense.date).toLocaleDateString()}</div>
           </div>
-          <div className="text-right">
-            <div className={`text-lg font-semibold ${theme === 'dark' ? 'text-white' : 'text-[#303036]'}`}>₹{expense.amount.toLocaleString('en-IN')}</div>
-            <div className={`text-sm px-2 py-1 rounded-lg ${
+          <div className="text-right flex-shrink-0">
+            <div className={`text-base md:text-lg font-semibold ${theme === 'dark' ? 'text-white' : 'text-[#303036]'}`}>₹{expense.amount.toLocaleString('en-IN')}</div>
+            <div className={`text-xs md:text-sm px-2 py-1 rounded-lg ${
               expense.status === 'approved' 
                 ? 'text-[#10B981] bg-[#10B981]/10' 
                 : expense.status === 'pending' 
