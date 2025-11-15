@@ -159,7 +159,7 @@ const Popup: React.FC<PopupProps> = ({ isOpen, onClose, title, children }) => {
     <>
       <div
         id="popup"
-        className="fixed rounded-2xl inset-0 bg-black/20 backdrop-blur-sm z-40"
+        className="fixed rounded-xl lg:rounded-2xl inset-0 bg-black/20 backdrop-blur-sm z-40"
         onClick={onClose}
       ></div>
       <div

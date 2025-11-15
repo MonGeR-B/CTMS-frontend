@@ -2,7 +2,12 @@
 import AppShell from '../components/layout/AppShell';
 import RecentExpenses from '../components/sections/RecentExpenses';
 import Bookings from '../components/sections/Bookings';
-import { ActiveTripsPopup, PendingApprovalsPopup, ExpensesPopup, BudgetPopup } from '../components/sections/StatPopups';
+import {
+  ActiveTripsPopup,
+  PendingApprovalsPopup,
+  ExpensesPopup,
+  BudgetPopup,
+} from '../components/sections/StatPopups';
 import { Plane, Clock, DollarSign, TrendingUp } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
 import { useState } from 'react';
@@ -44,7 +49,7 @@ export default function Home() {
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 lg:gap-6 mb-6 md:mb-8">
           <button
             onClick={() => setActivePopup('trips')}
-            className={`w-full rounded-2xl md:rounded-3xl p-3 md:p-4 shadow-[0_1px_3px_rgba(0,0,0,0.05)] hover:shadow-[0_2px_8px_rgba(0,0,0,0.18)] transition-all duration-200 text-left ${
+            className={`w-full rounded-2xl md:rounded-2xl p-3 md:p-4 shadow-[0_1px_3px_rgba(0,0,0,0.05)] hover:shadow-[0_2px_8px_rgba(0,0,0,0.18)] transition-all duration-200 text-left ${
               theme === 'dark'
                 ? 'bg-gray-800/80 backdrop-blur-sm border border-gray-700/40'
                 : 'bg-white/80 backdrop-blur-sm border border-white/40'
@@ -65,7 +70,9 @@ export default function Home() {
             >
               {stats.activeTrips}
             </div>
-            <div className={`text-xs md:text-sm ${theme === 'dark' ? 'text-gray-400' : 'text-[#787880]'}`}>
+            <div
+              className={`text-xs md:text-sm ${theme === 'dark' ? 'text-gray-400' : 'text-[#787880]'}`}
+            >
               Active Trips
             </div>
           </button>
@@ -93,7 +100,9 @@ export default function Home() {
             >
               {stats.pending}
             </div>
-            <div className={`text-xs md:text-sm ${theme === 'dark' ? 'text-gray-400' : 'text-[#787880]'}`}>
+            <div
+              className={`text-xs md:text-sm ${theme === 'dark' ? 'text-gray-400' : 'text-[#787880]'}`}
+            >
               Pending Approvals
             </div>
           </button>
@@ -121,7 +130,9 @@ export default function Home() {
             >
               ₹{stats.totalExpenses.toLocaleString('en-IN')}
             </div>
-            <div className={`text-xs md:text-sm ${theme === 'dark' ? 'text-gray-400' : 'text-[#787880]'}`}>
+            <div
+              className={`text-xs md:text-sm ${theme === 'dark' ? 'text-gray-400' : 'text-[#787880]'}`}
+            >
               Total Expenses
             </div>
           </button>
@@ -149,7 +160,9 @@ export default function Home() {
             >
               {stats.budgetUsed}%
             </div>
-            <div className={`text-xs md:text-sm ${theme === 'dark' ? 'text-gray-400' : 'text-[#787880]'}`}>
+            <div
+              className={`text-xs md:text-sm ${theme === 'dark' ? 'text-gray-400' : 'text-[#787880]'}`}
+            >
               Budget Used
             </div>
           </button>
@@ -180,24 +193,15 @@ export default function Home() {
             <Bookings />
           </div>
         </div>
-        
+
         {/* Popups */}
-        <ActiveTripsPopup 
-          isOpen={activePopup === 'trips'} 
-          onClose={() => setActivePopup(null)} 
+        <ActiveTripsPopup isOpen={activePopup === 'trips'} onClose={() => setActivePopup(null)} />
+        <PendingApprovalsPopup
+          isOpen={activePopup === 'approvals'}
+          onClose={() => setActivePopup(null)}
         />
-        <PendingApprovalsPopup 
-          isOpen={activePopup === 'approvals'} 
-          onClose={() => setActivePopup(null)} 
-        />
-        <ExpensesPopup 
-          isOpen={activePopup === 'expenses'} 
-          onClose={() => setActivePopup(null)} 
-        />
-        <BudgetPopup 
-          isOpen={activePopup === 'budget'} 
-          onClose={() => setActivePopup(null)} 
-        />
+        <ExpensesPopup isOpen={activePopup === 'expenses'} onClose={() => setActivePopup(null)} />
+        <BudgetPopup isOpen={activePopup === 'budget'} onClose={() => setActivePopup(null)} />
       </div>
     </AppShell>
   );
