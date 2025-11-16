@@ -2,6 +2,7 @@
 import { Bell, Menu, ChevronDown, User, Settings, LogOut, HelpCircle } from 'lucide-react';
 import React, { useState, useEffect } from 'react';
 import { useTheme } from '../../contexts/ThemeContext';
+import { useRouter } from 'next/router';
 import Notifications from '../sections/Notifications';
 
 export default function Header({ onMobileMenuToggle }: { onMobileMenuToggle?: () => void }) {
@@ -11,6 +12,7 @@ export default function Header({ onMobileMenuToggle }: { onMobileMenuToggle?: ()
   const [showAll, setShowAll] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
   const { theme } = useTheme();
+  const router = useRouter();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -174,6 +176,10 @@ export default function Header({ onMobileMenuToggle }: { onMobileMenuToggle?: ()
             </div>
             <div className="py-2">
               <button
+                onClick={() => {
+                  setShowProfile(false);
+                  router.push('/profile');
+                }}
                 className={`w-full flex items-center gap-3 px-4 py-3 text-left hover:bg-gray-100 dark:hover:bg-gray-700/50 transition-colors ${theme === 'dark' ? 'text-white' : 'text-[#303036]'}`}
               >
                 <User className="w-4 h-4" />
