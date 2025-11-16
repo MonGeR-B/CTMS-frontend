@@ -1,5 +1,6 @@
 // src/pages/index.tsx
 import AppShell from '../components/layout/AppShell';
+import HeroBanner from '../components/sections/HeroBanner';
 import RecentExpenses from '../components/sections/RecentExpenses';
 import Bookings from '../components/sections/Bookings';
 import {
@@ -31,18 +32,10 @@ export default function Home() {
         }`}
         style={{ fontFamily: 'Inter, system-ui, sans-serif' }}
       >
-        {/* Header Section */}
-        <div className="mb-6 md:mb-8">
-          <h1
-            className={`text-xl md:text-2xl font-semibold ${
-              theme === 'dark' ? 'text-white' : 'text-[#303036]'
-            } mb-2`}
-          >
-            Let&#39;s Plan, Baibhab!
-          </h1>
-          <p className={`${theme === 'dark' ? 'text-gray-400' : 'text-[#787880]'} text-sm`}>
-            Here&#39;s what&#39;s happening with your travel management today.
-          </p>
+
+
+        <div className="mb-6 md:mb-8 flex justify-center">
+          <HeroBanner />
         </div>
 
         {/* Stats Grid */}
