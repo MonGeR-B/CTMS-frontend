@@ -14,8 +14,12 @@ export default function Footer() {
       <div className="md:hidden">
         <div className="flex justify-between items-start">
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#FF4C39] to-[#FFB573] flex items-center justify-center text-white">
-              <Plane className="w-4 h-4" />
+            <div className="w-8 h-8 rounded-lg flex items-center justify-center">
+              <img
+                src={theme === 'dark' ? "/images/Darklogo.png" : "/images/Daytimelogo.png"}
+                alt="Logo"
+                className="w-8 h-8 object-contain"
+              />
             </div>
             <div>
               <div className={`font-semibold ${theme === 'dark' ? 'text-white' : 'text-[#303036]'} text-base`}>
@@ -45,8 +49,12 @@ export default function Footer() {
       <div className="hidden md:flex items-center justify-between">
         <div className="flex items-center gap-6">
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#FF4C39] to-[#FFB573] flex items-center justify-center text-white">
-              <Plane className="w-4 h-4" />
+            <div className="w-8 h-8 rounded-lg flex items-center justify-center">
+              <img
+                src={theme === 'dark' ? "/images/Darklogo.png" : "/images/Daytimelogo.png"}
+                alt="Logo"
+                className="w-8 h-8 object-contain"
+              />
             </div>
             <div>
               <div className={`font-semibold ${theme === 'dark' ? 'text-white' : 'text-[#303036]'} text-base`}>
