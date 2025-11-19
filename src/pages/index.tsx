@@ -32,8 +32,6 @@ export default function Home() {
         }`}
         style={{ fontFamily: 'Inter, system-ui, sans-serif' }}
       >
-
-
         <div className="mb-6 md:mb-8 flex justify-center">
           <HeroBanner />
         </div>

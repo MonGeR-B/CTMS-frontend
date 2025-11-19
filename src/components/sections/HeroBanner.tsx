@@ -11,7 +11,7 @@ export default function HeroBanner() {
       style={{ aspectRatio: '5.17 / 1' }}
     >
       <img
-        src={isDark ? "/images/Darkbanner.png" : "/images/DaytimeBanner.png"}
+        src={isDark ? '/images/DarkBanner.png' : '/images/DaytimeBanner.png'}
         alt="CTMS Cover"
         className="w-full h-full object-cover"
       />
